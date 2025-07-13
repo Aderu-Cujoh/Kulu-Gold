@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kami Terima Emas - Tempa Kekayaan Anda</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #000000;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+        .soft-glow {
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        .soft-glow:hover {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+            transform: scale(1.05);
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #FFD700;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.5);
+            border-color: #FF4500;
+        }
+        .soft-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 0;
+        }
+        .card-hover:hover .soft-effect {
+            opacity: 1;
+        }
+        .svg-rotate {
+            animation: rotate 10s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        #hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        #hero-video.loaded {
+            opacity: 0.8;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+        .section-transition {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        .section-transition.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .gold-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            z-index: 1;
+        }
+        .interactive-button {
+            position: relative;
+            z-index: 20;
+            pointer-events: auto;
+        }
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .hero-content p {
+                font-size: 1rem;
+            }
+            .section-transition h2 {
+                font-size: 2rem;
+            }
+            .gold-image {
+                height: 150px;
+            }
+            .card-hover {
+                padding: 1rem;
+            }
+            .max-w-7xl {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            input, textarea {
+                font-size: 0.9rem;
+                padding: 0.5rem;
+            }
+            .interactive-button {
+                font-size: 0.9rem;
+                padding: 0.75rem 1.5rem;
+            }
+        }
+        @media (max-width: 320px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .section-transition h2 {
+                font-size: 1.5rem;
+            }
+            .gold-image {
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Navigation -->
+    <header class="fixed top-0 w-full bg-black bg-opacity-95 z-50">
+        <div class="max-w-7xl mx-auto py-4 flex justify-between items-center px-4">
+            <div class="flex items-center">
+                <svg class="w-12 h-12 mr-2 svg-rotate" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5"></path>
+                    <path d="M7 12h10"></path>
+                </svg>
+                <div class="text-3xl font-playfair font-bold text-yellow-400 tracking-widest uppercase">Kami Terima Emas</div>
+            </div>
+            <nav>
+                <a href="#contact" class="text-yellow-400 soft-glow hover:text-yellow-500 uppercase cursor-pointer interactive-button">Kontak</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center">
+        <video id="hero-video" autoplay loop muted playsinline>
+            <source src="path/to/gold-ember-video.webm" type="video/webm">
+            <source src="path/to/background.mp4" type="video/mp4">
+            <!-- Placeholder: Video WebM/MP4 menampilkan api emas bergerak halus dengan partikel emas, durasi 10 detik, resolusi 1920x1080 -->
+        </video>
+        <div class="absolute inset-0 bg-black bg-opacity-80"></div>
+        <div class="hero-content text-center p-6">
+            <h1 class="text-5xl md:text-7xl font-playfair font-bold mb-4 tracking-widest uppercase soft-glow text-yellow-400">Tempa Kekayaan Anda</h1>
+            <p class="text-lg md:text-2xl mb-6 text-yellow-400">Ubah emas Anda menjadi nilai maksimal dengan proses transparan.</p>
+            <a href="#contact" class="inline-block bg-yellow-400 text-black font-playfair font-bold py-4 px-10 rounded-lg soft-glow hover:bg-yellow-500 uppercase cursor-pointer interactive-button">Hubungi Kami</a>
+        </div>
+    </section>
+
+    <!-- Types of Gold Gallery -->
+    <section id="types" class="py-20 px-4 bg-black section-transition">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-playfair font-bold mb-12 text-yellow-400 tracking-widest uppercase">Jenis Emas yang Kami Terima</h2>
+            <div class="flex flex-col md:flex-row gap-8 items-center">
+                <div class="md:w-1/2 card-hover p-6">
+                    <div class="soft-effect"></div>
+                    <img src="batangan.jpg" alt="Emas Batangan" class="gold-image">
+                    <h3 class="text-xl font-playfair font-bold mb-2 text-yellow-400 uppercase">Emas Batangan</h3>
+                    <p>Antam, UBS, atau merek lain, kami terima dengan penilaian transparan.</p>
+                </div>
+                <div class="md:w-1/2 flex flex-col gap-8">
+                    <div class="card-hover p-6">
+                        <div class="soft-effect"></div>
+                        <img src="perhiasan.jpg" alt="Perhiasan" class="gold-image">
+                        <h3 class="text-lg font-playfair font-bold mb-2 text-yellow-400 uppercase">Perhiasan</h3>
+                        <p>Perhiasan emas dalam kondisi apa pun, dengan atau tanpa surat.</p>
+                    </div>
+                    <div class="card-hover p-6">
+                        <div class="soft-effect"></div>
+                        <img src="rusak.jpg" alt="Emas Rusak" class="gold-image">
+                        <h3 class="text-lg font-playfair font-bold mb-2 text-yellow-400 uppercase">Emas Rusak</h3>
+                        <p>Emas patah atau rusak tetap bernilai di tangan kami.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="process" class="py-20 px-4 bg-gray-900 section-transition">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-playfair font-bold mb-12 text-yellow-400 tracking-widest uppercase text-center">Cara Kerja Kami</h2>
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/3 p-6 bg-black rounded-lg card-hover">
+                    <div class="soft-effect"></div>
+                    <svg class="w-12 h-12 mx-auto mb-4 svg-rotate" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                    </svg>
+                    <h3 class="text-xl font-playfair font-bold mb-4 text-yellow-400 uppercase text-center">1. Hubungi Kami</h3>
+                    <p>Kirim detail emas Anda melalui WhatsApp atau formulir kontak.</p>
+                </div>
+                <div class="md:w-1/3 p-6 bg-black rounded-lg card-hover">
+                    <div class="soft-effect"></div>
+                    <svg class="w-12 h-12 mx-auto mb-4 svg-rotate" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <h3 class="text-xl font-playfair font-bold mb-4 text-yellow-400 uppercase text-center">2. Pengecekan Emas</h3>
+                    <p>Kami cek kadar emas dengan alat XRF di depan Anda.</p>
+                </div>
+                <div class="md:w-1/3 p-6 bg-black rounded-lg card-hover">
+                    <div class="soft-effect"></div>
+                    <svg class="w-12 h-12 mx-auto mb-4 svg-rotate" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2">
+                        <path d="M4 4h16v12H5.17L4 4zm3 4h10m-10 4h10"></path>
+                    </svg>
+                    <h3 class="text-xl font-playfair font-bold mb-4 text-yellow-400 uppercase text-center">3. Dapatkan Penawaran</h3>
+                    <p>Terima penawaran harga terbaik sesuai pasar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculator" class="py-20 px-4 bg-black section-transition">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-playfair font-bold mb-12 text-yellow-400 tracking-widest uppercase">Kalkulator Harga Emas</h2>
+            <p class="text-xl mb-6 text-yellow-400">Hitung nilai emas Anda dengan cepat dan mudah!</p>
+            <div class="max-w-lg mx-auto p-6 bg-gray-900 rounded-lg card-hover">
+                <div class="soft-effect"></div>
+                <div class="space-y-4 relative">
+                    <input id="gold-weight" type="number" placeholder="Berat Emas (gram)" class="w-full p-3 rounded-lg bg-gray-800 text-white border border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400" required min="0" step="0.01">
+                    <input id="gold-karat" type="number" placeholder="Kadar Emas (karat)" class="w-full p-3 rounded-lg bg-gray-800 text-white border border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400" required min="0" max="24" step="0.1">
+                    <button onclick="calculatePrice()" class="w-full bg-yellow-400 text-black font-playfair font-bold py-3 rounded-lg soft-glow hover:bg-yellow-500 uppercase cursor-pointer interactive-button">Hitung Sekarang</button>
+                    <p id="price-result" class="text-lg text-yellow-400"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-20 px-4 bg-gray-900 section-transition">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-playfair font-bold mb-12 text-yellow-400 tracking-widest uppercase">Apa Kata Pelanggan Kami</h2>
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/2 p-6 bg-black rounded-lg card-hover">
+                    <div class="soft-effect"></div>
+                    <p class="italic text-lg">"Prosesnya cepat, transparan, dan harga bikin kagum! Emas rusak jadi kekayaan!"</p>
+                    <p class="mt-4 font-playfair font-bold text-yellow-400 uppercase">- Budi, Jakarta</p>
+                </div>
+                <div class="md:w-1/2 p-6 bg-black rounded-lg card-hover">
+                    <div class="soft-effect"></div>
+                    <p class="italic text-lg">"Pelayanan kelas dunia, harga terbaik, vibe-nya luar biasa!"</p>
+                    <p class="mt-4 font-playfair font-bold text-yellow-400 uppercase">- Siti, Bandung</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about" class="py-20 px-4 bg-black section-transition">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-playfair font-bold mb-12 text-yellow-400 tracking-widest uppercase">Tentang Kami</h2>
+            <p class="text-xl mb-6 text-yellow-400">Kami adalah ahli dalam transformasi emas menjadi kekayaan, dengan pengalaman lebih dari 10 tahun di industri.</p>
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/2 p-6 bg-gray-900 rounded-lg card-hover">
+                    <div class="soft-effect"></div>
+                    <svg class="w-12 h-12 mx-auto mb-4 svg-rotate" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5"></path>
+                    </svg>
+                    <h3 class="text-xl font-playfair font-bold mb-4 text-yellow-400 uppercase">Warisan Kami</h3>
+                    <p>Berdiri sejak 2015, kami telah membantu ribuan pelanggan mengubah emas mereka menjadi nilai finansial.</p>
+                </div>
+                <div class="md:w-1/2 p-6 bg-gray-900 rounded-lg card-hover">
+                    <div class="soft-effect"></div>
+                    <svg class="w-12 h-12 mx-auto mb-4 svg-rotate" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2">
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"></path>
+                    </svg>
+                    <h3 class="text-xl font-playfair font-bold mb-4 text-yellow-400 uppercase">Kepercayaan Anda</h3>
+                    <p>Dengan teknologi XRF dan proses transparan, kami menjamin kepercayaan Anda terjaga.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 bg-gray-900 section-transition">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-playfair font-bold mb-12 text-yellow-400 tracking-widest uppercase">Hubungi Kami</h2>
+            <p class="text-xl mb-6 text-yellow-400">Kami siap membantu Anda menyalakan kekayaan dari emas Anda!</p>
+            <form id="contact-form" class="max-w-lg mx-auto space-y-4 p-6 bg-black rounded-lg card-hover">
+                <div class="soft-effect"></div>
+                <input type="text" placeholder="Nama" class="w-full p-3 rounded-lg bg-gray-800 text-white border border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400" required>
+                <input type="tel" placeholder="Nomor Telepon" class="w-full p-3 rounded-lg bg-gray-800 text-white border border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400" required>
+                <textarea placeholder="Deskripsi Emas (Jenis, Berat, Kondisi)" class="w-full p-3 rounded-lg bg-gray-800 text-white border border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400" rows="4" required></textarea>
+                <button type="submit" class="w-full bg-yellow-400 text-black font-playfair font-bold py-4 rounded-lg soft-glow hover:bg-yellow-500 uppercase cursor-pointer interactive-button">Kirim Sekarang</button>
+            </form>
+            <a href="https://wa.me/6281234567890" target="_blank" class="inline-block mt-6 bg-orange-600 text-white font-playfair font-bold py-4 px-10 rounded-lg soft-glow hover:bg-orange-700 uppercase cursor-pointer interactive-button">Chat via WhatsApp</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-4 bg-black text-center">
+        <div class="flex justify-center items-center mb-4">
+            <svg class="w-12 h-12 mr-2 svg-rotate" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5"></path>
+                <path d="M7 12h10"></path>
+            </svg>
+            <div class="text-3xl font-playfair font-bold text-yellow-400 tracking-widest uppercase">Kami Terima Emas</div>
+        </div>
+        <p class="text-yellow-400 uppercase">Tempa Kekayaan Anda</p>
+        <p class="mt-2">© 2025 Kami Terima Emas. Semua hak dilindungi.</p>
+        <p class="mt-2">Kontak: +62 812 3456 7890 | Email: info@kamiterimaemas.com</p>
+        <p class="mt-2">Jl. Emas No. 123, Jakarta, Indonesia</p>
+    </footer>
+
+    <script>
+        // Prevent flash on load
+        window.addEventListener('load', () => {
+            document.getElementById('hero-video').classList.add('loaded');
+        });
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+        document.querySelectorAll('.section-transition').forEach(section => {
+            gsap.fromTo(section, 
+                { opacity: 0, y: 50 },
+                { 
+                    opacity: 1, 
+                    y: 0, 
+                    duration: 1, 
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none',
+                    }
+                }
+            );
+        });
+
+        // Animate hero content
+        gsap.from('.hero-content h1', { opacity: 0, y: 50, duration: 1, delay: 0.5, ease: 'power2.out' });
+        gsap.from('.hero-content p', { opacity: 0, y: 50, duration: 1, delay: 0.7, ease: 'power2.out' });
+        gsap.from('.hero-content a', { opacity: 0, y: 50, duration: 1, delay: 0.9, ease: 'power2.out' });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Calculator functionality
+        function calculatePrice() {
+            const weight = parseFloat(document.getElementById('gold-weight').value);
+            const karat = parseFloat(document.getElementById('gold-karat').value);
+            const pricePerGram = 1000000; // Placeholder harga per gram (IDR)
+            const resultElement = document.getElementById('price-result');
+            if (weight > 0 && karat > 0 && karat <= 24) {
+                const purity = karat / 24;
+                const estimatedPrice = weight * purity * pricePerGram;
+                resultElement.innerText = `Estimasi Harga: Rp ${estimatedPrice.toLocaleString('id-ID')}`;
+                gsap.fromTo(resultElement, 
+                    { opacity: 0, y: 20 }, 
+                    { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
+                );
+            } else {
+                resultElement.innerText = 'Masukkan berat dan kadar emas yang valid (kadar maks. 24 karat).';
+                gsap.fromTo(resultElement, 
+                    { opacity: 0, y: 20 }, 
+                    { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
+                );
+            }
+        }
+
+        // Form submission handling
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = this.querySelector('input[type="text"]').value;
+            const phone = this.querySelector('input[type="tel"]').value;
+            const description = this.querySelector('textarea').value;
+            if (name && phone && description) {
+                alert('Formulir terkirim! (Ini adalah demo, sesuaikan dengan backend Anda.)');
+                this.reset();
+            } else {
+                alert('Harap isi semua kolom dengan benar.');
+            }
+        });
+    </script>
+</body>
+</html>
